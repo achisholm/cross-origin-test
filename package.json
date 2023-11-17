@@ -1,0 +1,6 @@
+{
+  "name": "cross-origin-test",
+  "scripts": {
+    "start": "node server.js 1337 & node server.js 1338"
+  }
+}
