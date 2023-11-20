@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>No CORS</title>
 </head>
+
 <body>
     <h1>Cross-Origin Script Test (No CORS)</h1>
-    
+
     <div id="errorLog"></div>
-    
+
     <script>
-        window.onerror = function(message, source, lineno, colno, error) {
+        window.onerror = function (message, source, lineno, colno, error) {
             const errorLog = document.getElementById('errorLog')
             errorLog.innerText = 'Error caught: ' + message + '\n' + 'Source: ' + source + '\n' + 'Line: ' + lineno + '\n' + 'Column: ' + colno
         }
     </script>
-    
-    <script src="http://localhost:1337/script.js"></script>
+
+    <script src="http://localhost:1337/script-no-cors.js"></script>
 
 </body>
+
 </html>

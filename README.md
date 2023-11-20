@@ -10,5 +10,5 @@ npm start
 ```
 
 ## Testing
-- CORS: Open `http://localhost:1337/cors.html`
+- CORS: Open `http://localhost:1338/cors.html`
 - No CORS: Open `http://localhost:1338/no-cors.html`

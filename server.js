@@ -21,15 +21,23 @@ const server = http.createServer((req, res) => {
 
   // Check if file exists
   if (fs.existsSync(filePath)) {
-    const content = fs.readFileSync(filePath)
+    
+    // Set headers before sending the response
     res.setHeader('Content-Type', contentType)
-
+    
     // Set CORS header based on filename
-    if (filePath.endsWith('cors.html')) {
+    if (filePath.endsWith('no-cors.js')) {
+      const content = fs.readFileSync(filePath)
+      res.end(content)
+    } else if (filePath.endsWith('cors.js')){
       res.setHeader('Access-Control-Allow-Origin', '*')
+      const content = fs.readFileSync(filePath)
+      res.end(content)
+    } else {
+      const content = fs.readFileSync(filePath)
+      res.end(content)
     }
-
-    res.end(content)
+    
   } else {
     // File not found, send 404 response
     res.statusCode = 404
@@ -38,10 +46,8 @@ const server = http.createServer((req, res) => {
 })
 
 server.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`)
   if (PORT === 1337) {
-    console.log(`- CORS Testing: http://localhost:${PORT}/cors.html`)
-  } else if (PORT === 1338) {
-    console.log(`- No CORS Testing: http://localhost:${PORT}/no-cors.html`)
-  }  
+    console.log(`- CORS Testing: http://localhost:1338/cors.html`)
+    console.log(`- No CORS Testing: http://localhost:1338/no-cors.html`)
+  }
 })
