@@ -19,15 +19,22 @@ const server = http.createServer((req, res) => {
       break
   }
 
-  const content = fs.readFileSync(filePath)
-  res.setHeader('Content-Type', contentType)
+  // Check if file exists
+  if (fs.existsSync(filePath)) {
+    const content = fs.readFileSync(filePath)
+    res.setHeader('Content-Type', contentType)
 
-  // Set CORS header based on filename
-  if (filePath.endsWith('cors.html')) {
-    res.setHeader('Access-Control-Allow-Origin', '*')
+    // Set CORS header based on filename
+    if (filePath.endsWith('cors.html')) {
+      res.setHeader('Access-Control-Allow-Origin', '*')
+    }
+
+    res.end(content)
+  } else {
+    // File not found, send 404 response
+    res.statusCode = 404
+    res.end('404 Not Found')
   }
-
-  res.end(content)
 })
 
 server.listen(PORT, () => {
